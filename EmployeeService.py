@@ -34,6 +34,16 @@ def getEmp(empId):
     usr = [ emp for emp in empDB if (emp['id'] == empId) ] 
     return jsonify({'emp':usr})
 
+@app.route('/empdb/salary/lowest',methods=['GET'])
+def lowestSalary():
+    min_salary = min(empDB, key=lambda x: int(x['salary']))
+    return jsonify(min_salary)
+
+
+@app.route('/empdb/salary/highest',methods=['GET'])
+def highestSalary():
+    max_salary = min(empDB, key=lambda x: int(x['salary']))
+    return jsonify(max_salary)
 
 @app.route('/empdb/employee/<empId>',methods=['PUT'])
 def updateEmp(empId):
