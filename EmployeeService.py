@@ -42,7 +42,7 @@ def lowestSalary():
 
 @app.route('/empdb/salary/highest',methods=['GET'])
 def highestSalary():
-    max_salary = min(empDB, key=lambda x: int(x['salary']))
+    max_salary = max(empDB, key=lambda x: int(x['salary']))
     return jsonify(max_salary)
 
 @app.route('/empdb/employee/<empId>',methods=['PUT'])
@@ -71,7 +71,8 @@ def createEmp():
     dat = {
     'id':request.json['id'],
     'name':request.json['name'],
-    'title':request.json['title']
+    'title':request.json['title'],
+    'salary':request.json['salary']
     }
     empDB.append(dat)
     return jsonify(dat)

@@ -3,6 +3,7 @@ import const
 
 def serviceTester():
     api_base_url = 'http://' + const.IP_ADD + ':' + str(const.PORT) + '/empdb/employee'
+    api_base_url_salary = 'http://' + const.IP_ADD + ':' + str(const.PORT) + '/empdb/salary'
 
     print ('Will connect to: ' + api_base_url)
     
@@ -38,11 +39,24 @@ def serviceTester():
     response = requests.post(api_url, json=employee)
     print (response.json())
 
+      # Test get_highest_salary endpoint
+    api_url = api_base_url_salary + '/highest'
+    print ('Calling GET on endpoint: ' + api_base_url_salary + '/highest')
+    response = requests.get(api_base_url_salary+'/highest')
+    print (response.json())
+
+    # Test get_highest_salary endpoint
+    api_url = api_base_url_salary + '/lowest'
+    print ('Calling GET on endpoint: ' + api_base_url_salary + '/lowest')
+    response = requests.get(api_base_url_salary+'/lowest')
+    print (response.json())
+
     # Test delete_employee endpoint
     api_url = api_base_url + '/101'
     print ('Calling DELETE on endpoint: ' + api_url)
     response = requests.delete(api_url)
     print (response.json())
+
 
     # This endpoint does not exist in the service -- will result in an HTTP 404 error
     api_url = api_base_url + '/201/40000/Programmer'
